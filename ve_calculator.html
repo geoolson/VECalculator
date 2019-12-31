@@ -23,6 +23,7 @@ function calc() {
   var temp = parseFloat(document.getElementById("temp").value);
 
   function density(){
+    var standard_pressure = 101325 * Math.pow((1.0 - elevation * 0.0000225577), 5.2559)
     return standard_pressure / (287.05 * (temp + 273.15 ) ) / 1000
   }
   function est_air_density(){
@@ -32,7 +33,6 @@ function calc() {
     return est_air_density() / density() * 100;
   }
 
-  standard_pressure = 101325 * Math.pow((1.0 - elevation * 0.0000225577), 5.2559)
 
   document.getElementById("VE").innerHTML ='volumetric efficiency is '+VE().toFixed(2)+' percent';
 }
