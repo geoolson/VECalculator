@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Volumetric Efficiency Calculator</h3>
+
+displacement(in CC's): <input type="text" id="disp"><br>
+MAF input(g/s): <input type="text" id="massair"><br>
+engine rpm: <input type="text" id="rpm"><br>
+elevation in meters above sea level: <input type="text" id="elevation"><br>
+temperature in celsius: <input type="text" id="temp"><br>
+
+<button onclick="calc()">Calculate</button>
+
+<p id="VE"></p>
+
+<script>
+function calc() {
+var disp = parseFloat(document.getElementById("disp").value);
+var massair = parseFloat(document.getElementById("massair").value);
+var rpm = parseFloat(document.getElementById("rpm").value);
+var elevation = parseFloat(document.getElementById("elevation").value);
+var temp = parseFloat(document.getElementById("temp").value);
+
+function density(){
+return standard_pressure / (287.05 * (temp + 273.15 ) ) / 1000
+}
+function est_air_density(){
+return massair * (2/disp) * (60/rpm) //this calculates the estimated air density in the engine
+}
+function VE(){
+return est_air_density() / density() * 100;
+}
+
+standard_pressure = 101325 * Math.pow((1.0 - elevation * 0.0000225577), 5.2559)
+
+document.getElementById("VE").innerHTML = 'volumetric efficiency is ' + VE() + ' percent';
+}
+</script>
+</body>
+</html>
