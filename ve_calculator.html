@@ -16,25 +16,25 @@ temperature in celsius: <input type="text" id="temp"><br>
 
 <script>
 function calc() {
-var disp = parseFloat(document.getElementById("disp").value);
-var massair = parseFloat(document.getElementById("massair").value);
-var rpm = parseFloat(document.getElementById("rpm").value);
-var elevation = parseFloat(document.getElementById("elevation").value);
-var temp = parseFloat(document.getElementById("temp").value);
+  var disp = parseFloat(document.getElementById("disp").value);
+  var massair = parseFloat(document.getElementById("massair").value);
+  var rpm = parseFloat(document.getElementById("rpm").value);
+  var elevation = parseFloat(document.getElementById("elevation").value);
+  var temp = parseFloat(document.getElementById("temp").value);
 
-function density(){
-return standard_pressure / (287.05 * (temp + 273.15 ) ) / 1000
-}
-function est_air_density(){
-return massair * (2/disp) * (60/rpm) //this calculates the estimated air density in the engine
-}
-function VE(){
-return est_air_density() / density() * 100;
-}
+  function density(){
+    return standard_pressure / (287.05 * (temp + 273.15 ) ) / 1000
+  }
+  function est_air_density(){
+    return massair * (2/disp) * (60/rpm) //this calculates the estimated air density in the engine
+  }
+  function VE(){
+    return est_air_density() / density() * 100;
+  }
 
-standard_pressure = 101325 * Math.pow((1.0 - elevation * 0.0000225577), 5.2559)
+  standard_pressure = 101325 * Math.pow((1.0 - elevation * 0.0000225577), 5.2559)
 
-document.getElementById("VE").innerHTML = 'volumetric efficiency is ' + VE() + ' percent';
+  document.getElementById("VE").innerHTML ='volumetric efficiency is '+VE().toFixed(2)+' percent';
 }
 </script>
 </body>
